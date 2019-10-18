@@ -57,9 +57,15 @@ var x4 = new extra("BMW Z4 Roadstar", 45079, "img/img4.jpg" ,340  +" PS","Benzin
 x4.mydata();
 
 var array = [x1,x2,x3,x4];
+
 var cart=[];
+
+
+
+
 function addToCart(obj) {
-if (obj.q == 0) {
+
+if (obj.q == 0 ) {
   cart.push(obj);
   obj.q++;
   showCart();
@@ -68,6 +74,7 @@ if (obj.q == 0) {
   showCart();
 }
 }
+
 
 
 
@@ -82,7 +89,7 @@ for(let i in btn){
 
 function showCart(){
   document.getElementById("mycart").innerHTML ="";
-for(let i in cart){
+    for(let i in cart){
 
   document.getElementById("mycart").innerHTML += `
 
@@ -90,9 +97,48 @@ for(let i in cart){
   <p class="border w-25">${cart[i].q}</p>
   <button class='btn btn-outline-info btn-sm plus'>+</button><button class='btn btn-outline-info btn-sm minus'>-</button>
   <p class="border w-25">${cart[i].price*cart[i].q}</p>
-  <button class='btn btn-outline-danger btn-sm delete'>x</button></div>`;
+  <button class='btn btn-outline-danger btn-sm btndelete'>x</button></div>`;
 }
-}
+
+var deleteBtn = document.getElementsByClassName("btndelete");
+var plusbtn = document.getElementsByClassName("plus");
+var minusBtn = document.getElementsByClassName("minus");
+              let x=0;
+
+                for(let i in cart){
+                if (cart[i] != undefined) {
+                deleteBtn[x].addEventListener("click",()=>{deleteFromCart(i)});
+                plusbtn[x].addEventListener("click",()=>{addQuantity(i)});
+                minusBtn[x].addEventListener("click",()=>{removQuantity(i)});
+
+                x++;
+
+                }
+              }
+            }
+
+
+
+      function deleteFromCart(i) {
+
+
+      cart[i] = undefined;
+
+      showCart();
+      //console.log(cart[i]);
+      }
+
+    function addQuantity(i) {
+        cart[i].q++;
+        showCart();
+
+    }
+    function removQuantity(i) {
+        cart[i].q--;
+        showCart();
+
+    }
+
 
 
 
@@ -197,7 +243,7 @@ for (let i=1; i <= 10; ++i){
 	var divRight = document.createElement('div');
 	divRight.setAttribute('class', 'mydiv');
 
-	for (let j=1; j <= 10; ++j){
+	for (let i=1; j <= 10; ++j){
 
 	var result2 : any = i * j;
 

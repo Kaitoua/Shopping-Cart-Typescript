@@ -64,8 +64,36 @@ for (var i in btn) {
 function showCart() {
     document.getElementById("mycart").innerHTML = "";
     for (var i in cart) {
-        document.getElementById("mycart").innerHTML += "\n\n  <div class=\"row justify-content-between\"><p class=\"border w-25\">" + cart[i].name + "</p>\n  <p class=\"border w-25\">" + cart[i].q + "</p>\n  <button class='btn btn-outline-info btn-sm plus'>+</button><button class='btn btn-outline-info btn-sm minus'>-</button>\n  <p class=\"border w-25\">" + cart[i].price * cart[i].q + "</p>\n  <button class='btn btn-outline-danger btn-sm delete'>x</button></div>";
+        document.getElementById("mycart").innerHTML += "\n\n  <div class=\"row justify-content-between\"><p class=\"border w-25\">" + cart[i].name + "</p>\n  <p class=\"border w-25\">" + cart[i].q + "</p>\n  <button class='btn btn-outline-info btn-sm plus'>+</button><button class='btn btn-outline-info btn-sm minus'>-</button>\n  <p class=\"border w-25\">" + cart[i].price * cart[i].q + "</p>\n  <button class='btn btn-outline-danger btn-sm btndelete'>x</button></div>";
     }
+    var deleteBtn = document.getElementsByClassName("btndelete");
+    var plusbtn = document.getElementsByClassName("plus");
+    var minusBtn = document.getElementsByClassName("minus");
+    var x = 0;
+    var _loop_2 = function (i) {
+        if (cart[i] != undefined) {
+            deleteBtn[x].addEventListener("click", function () { deleteFromCart(i); });
+            plusbtn[x].addEventListener("click", function () { addQuantity(i); });
+            minusBtn[x].addEventListener("click", function () { removQuantity(i); });
+            x++;
+        }
+    };
+    for (var i in cart) {
+        _loop_2(i);
+    }
+}
+function deleteFromCart(i) {
+    cart[i] = undefined;
+    showCart();
+    //console.log(cart[i]);
+}
+function addQuantity(i) {
+    cart[i].q++;
+    showCart();
+}
+function removQuantity(i) {
+    cart[i].q--;
+    showCart();
 }
 // for(let i = 0; i < btn.length;i++){
 // btn[i].addEventListener("click", function(){
@@ -149,7 +177,7 @@ for (let i=1; i <= 10; ++i){
     var divRight = document.createElement('div');
     divRight.setAttribute('class', 'mydiv');
 
-    for (let j=1; j <= 10; ++j){
+    for (let i=1; j <= 10; ++j){
 
     var result2 : any = i * j;
 
